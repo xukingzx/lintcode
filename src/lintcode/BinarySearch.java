@@ -1,13 +1,80 @@
 package lintcode;
 
+import java.util.Arrays;
+
 /**
  * Created by ouakira on 2017/2/27.
  */
 public class BinarySearch {
     public static void main(String[] args) {
-        int[] nums = {4,2147483645,2147483646,2147483647};
-        System.out.println(search(nums, 4));
+        int[] nums = {5, 7, 7, 8, 8, 10};
+        System.out.println(Arrays.toString(searchRange(nums, 6)));
 
+    }
+
+    public static int[] searchRange(int[] A, int target) {
+        int[] r = new int[]{-1, -1};
+
+        int left = 0;
+        int right = A.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (A[mid] == target) {
+                if (mid == 0) {
+                    return new int[]{0, 0};
+                } else if (mid == A.length - 1) {
+                    return new int[]{A.length -1, A.length -1};
+                } else {
+                    r[0] = getLeft(A, left, mid, target);
+                    r[1] = getRight(A, mid, right, target);
+                    return r;
+                }
+            }
+            if (A[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid -1;
+            }
+        }
+        return r;
+    }
+
+    private static int getLeft(int[] nums, int left, int right, int target) {
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                if (mid == 0) {
+                    return 0;
+                } else if (nums[mid] > nums[mid - 1]){
+                    return mid;
+                }
+            }
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+    }
+
+    private static int getRight(int[] nums, int left, int right, int target) {
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                if (mid == nums.length - 1) {
+                    return nums.length - 1;
+                } else if (nums[mid] < nums[mid + 1]){
+                    return mid;
+                }
+            }
+            if (nums[mid] <= target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
     }
 
     public static int search(int[] A, int target) {
