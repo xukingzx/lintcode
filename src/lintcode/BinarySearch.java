@@ -5,9 +5,29 @@ package lintcode;
  */
 public class BinarySearch {
     public static void main(String[] args) {
-        int[] nums = {2147483644,2147483645,2147483646,2147483647};
-        System.out.println(woodCut(nums, 4));
+        int[] nums = {4,2147483645,2147483646,2147483647};
+        System.out.println(search(nums, 4));
 
+    }
+
+    public static int search(int[] A, int target) {
+        if (A.length == 0) {
+            return -1;
+        }
+        int left = 0;
+        int right = A.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (target == A[mid]) {
+                return mid;
+            }
+            if ((target > A[mid] && target < A[A.length - 1]) || (target < A[mid] && target <= A[A.length - 1])) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return -1;
     }
 
     public static int woodCut(int[] L, int k) {

@@ -7,9 +7,37 @@ import java.util.*;
  */
 public class IntegerArray {
     public static void main(String[] args) {
-        int[] nums = {101,33,44,55,67,78,-101,33,-44,55,-67,78,-100,200,-1000,22,100,200,1000,22};
-        int[] nums2 = {2, 3};
-        System.out.println(Arrays.toString(subarraySumClosest(nums)));
+        int[] nums = {4,5,6,1,2,3};
+        System.out.println(findMin(nums));
+    }
+
+    public static int findMin(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        if (nums[0] < nums[nums.length - 1]) {
+            return nums[0];
+        }
+        if (nums[nums.length - 1] < nums[nums.length - 2]) {
+            return nums[nums.length - 1];
+        }
+        int left = 1;
+        int right = nums.length - 2;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < nums[mid - 1] && nums[mid] < nums[mid + 1]) {
+                return nums[mid];
+            }
+            if (nums[mid] < nums[nums.length - 1]) {
+                right = right - 1;
+            } else {
+                left = left + 1;
+            }
+        }
+        return 0;
     }
 
     public static int[] subarraySumClosest(int[] nums){
