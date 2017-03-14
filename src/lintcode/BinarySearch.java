@@ -1,15 +1,11 @@
 package lintcode;
 
-import java.util.Arrays;
-
 /**
  * Created by ouakira on 2017/2/27.
  */
 public class BinarySearch {
     public static void main(String[] args) {
-        int[] nums = {5, 7, 7, 8, 8, 10};
-        System.out.println(Arrays.toString(searchRange(nums, 6)));
-
+        
     }
 
     public static int[] searchRange(int[] A, int target) {
@@ -23,7 +19,7 @@ public class BinarySearch {
                 if (mid == 0) {
                     return new int[]{0, 0};
                 } else if (mid == A.length - 1) {
-                    return new int[]{A.length -1, A.length -1};
+                    return new int[]{A.length - 1, A.length - 1};
                 } else {
                     r[0] = getLeft(A, left, mid, target);
                     r[1] = getRight(A, mid, right, target);
@@ -33,7 +29,7 @@ public class BinarySearch {
             if (A[mid] < target) {
                 left = mid + 1;
             } else {
-                right = mid -1;
+                right = mid - 1;
             }
         }
         return r;
@@ -45,7 +41,7 @@ public class BinarySearch {
             if (nums[mid] == target) {
                 if (mid == 0) {
                     return 0;
-                } else if (nums[mid] > nums[mid - 1]){
+                } else if (nums[mid] > nums[mid - 1]) {
                     return mid;
                 }
             }
@@ -64,7 +60,7 @@ public class BinarySearch {
             if (nums[mid] == target) {
                 if (mid == nums.length - 1) {
                     return nums.length - 1;
-                } else if (nums[mid] < nums[mid + 1]){
+                } else if (nums[mid] < nums[mid + 1]) {
                     return mid;
                 }
             }
@@ -81,17 +77,34 @@ public class BinarySearch {
         if (A.length == 0) {
             return -1;
         }
+        int length = A.length - 1;
         int left = 0;
-        int right = A.length - 1;
+        int right = length;
         while (left <= right) {
             int mid = left + (right - left) / 2;
             if (target == A[mid]) {
                 return mid;
             }
-            if ((target > A[mid] && target < A[A.length - 1]) || (target < A[mid] && target <= A[A.length - 1])) {
-                right = mid - 1;
+            if (A[mid] > A[left]) {
+                if (target > A[mid]) {
+                    left = mid + 1;
+                } else {
+                    if (target >= A[left]) {
+                        right = mid - 1;
+                    } else {
+                        left = mid + 1;
+                    }
+                }
             } else {
-                left = mid + 1;
+                if (target < A[mid]) {
+                    right = mid - 1;
+                } else {
+                    if (target <= A[right]) {
+                        left = mid + 1;
+                    } else {
+                        right = mid - 1;
+                    }
+                }
             }
         }
         return -1;
