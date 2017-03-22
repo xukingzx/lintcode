@@ -5,7 +5,60 @@ package lintcode;
  */
 public class Binary {
     public static void main(String[] args) {
-        System.out.println(updateBit(35,41,3,9));
+        System.out.println(binaryRepresentation("4096.6435546875"));
+    }
+
+    public static String binaryRepresentation(String n) {
+        String[] num = n.split("\\.");
+        int left = Integer.parseInt(num[0]);
+        Double right = null;
+        if (num.length > 1) {
+            right = Double.parseDouble("0." + num[1]);
+        }
+        String str = "";
+        while (left != 0) {
+            if ((left & 1) == 1) {
+                str = "1" + str;
+            } else {
+                str = "0" + str;
+            }
+            left = left >>> 1;
+        }
+        if (right == null || right == 0) {
+            return str;
+        }
+        str += "".equals(str) ? "0." : ".";
+        int i;
+        for (i = 0; i < 32; i++) {
+            right *= 2;
+            if (right >= 1) {
+                str += "1";
+                if (right == 1) {
+                    break;
+                }
+                right -= 1;
+            } else {
+                str += "0";
+            }
+        }
+        if (i == 32) {
+            return "ERROR";
+        }
+        return str;
+    }
+
+    public static int numTrees(int n) {
+        // write your code here
+        if(n <= 1) {
+            return 1;
+        }
+        int a = 1;
+        int b = 1;
+        for (int i = 1; i <= n; i++) {
+            b = a * (4 * i - 2) / (i + 1);
+            a = b;
+        }
+        return b;
     }
 
     public static int fastPower(int a, int b, int n) {
