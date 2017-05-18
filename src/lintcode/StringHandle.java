@@ -5,7 +5,7 @@ package lintcode;
  */
 public class StringHandle {
     public static void main(String[] args) {
-
+        System.out.println(addStrings("158", "66"));
     }
 
     public static String countAndSay(int n) {
@@ -34,4 +34,49 @@ public class StringHandle {
         buffer.append(num).append(str.charAt(str.length() - 1));
         return buffer.toString();
     }
+
+    public static String addStrings(String num1, String num2) {
+        // Write your code here
+        final StringBuffer buffer = new StringBuffer();
+        int len1 = num1.length() - 1;
+        int len2 = num2.length() - 1;
+        String s = num1.length() > num2.length() ? num1 : num2;
+        int flag = 0;
+        while (len1 >= 0 && len2 >= 0) {
+            int num = num1.charAt(len1) + num2.charAt(len2) + flag - 96;
+            if (num < 10) {
+                flag = 0;
+                buffer.insert(0, num);
+            } else {
+                flag = 1;
+                buffer.insert(0, num % 10);
+            }
+            len1--;
+            len2--;
+        }
+        while (len1 >= 0) {
+            int num = num1.charAt(len1) + flag - 48;
+            if (num < 10) {
+                flag = 0;
+                buffer.insert(0, num);
+            } else {
+                flag = 1;
+                buffer.insert(0, num % 10);
+            }
+            len1--;
+        }
+        while (len2 >= 0) {
+            int num = num2.charAt(len2) + flag - 48;
+            if (num < 10) {
+                flag = 0;
+                buffer.insert(0, num);
+            } else {
+                flag = 1;
+                buffer.insert(0, num % 10);
+            }
+            len2--;
+        }
+        return buffer.toString();
+    }
+
 }

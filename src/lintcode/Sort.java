@@ -1,14 +1,21 @@
 package lintcode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by ouakira on 2017/4/12.
  */
 public class Sort {
     public static void main(String[] args) {
-        int[] nums = {4, 6, 2, 8, 1};
-        fastSort(nums, 0, 4);
+        int[] nums = new int[]{1, 3, 5};
+        new ArrayList<>();
+        List list = Arrays.asList(nums);
+    }
+
+    public static int count(int a, int b) {
+        return a > b ? a - b : b - a;
     }
 
     public static void fastSort(int[] nums, int left, int right) {
@@ -19,9 +26,7 @@ public class Sort {
             while (l < r && nums[r] >= temp)
                 r--;
             if (l < r) {
-                int t = nums[r];
-                nums[r] = nums[l];
-                nums[l] = t;
+                nums[l] = nums[r];
                 l++;
             }
 
@@ -29,12 +34,11 @@ public class Sort {
             while (l < r && nums[l] <= temp)
                 l++;
             if (l < r) {
-                int t = nums[r];
                 nums[r] = nums[l];
-                nums[l] = t;
                 r--;
             }
         }
+        nums[l] = temp;
         System.out.println(Arrays.toString(nums));
         System.out.println("l = " + l + " r = " + r + " temp = " + temp);
         if (l > left) {
@@ -77,5 +81,10 @@ public class Sort {
         System.out.print("l=" + (l + 1) + "h=" + (h + 1) + "povit=" + povit + "\n");
         if (l > low) sort(arr, low, l - 1);
         if (h < high) sort(arr, l + 1, high);
+    }
+
+    public static void quickSort(int[] nums, int left, int right) {
+        int i = left, j = right;
+        int key = nums[i];
     }
 }
