@@ -7,8 +7,71 @@ import java.util.Arrays;
  */
 public class GreedyAlgorithm {
     public static void main(String[] args) {
-        int[] nums = {2, 2, 3, 1};
-        System.out.println(Arrays.toString(nextPermutation(nums)));
+        int[] nums = {3, 1, 1, 0, 3};
+        System.out.println(canJumpGreedyTwo(nums));
+    }
+
+    /**
+     * 动态规划实现116-跳跃游戏
+     *
+     * @param A
+     * @return
+     */
+    public static boolean canJump(int[] A) {
+        int length = A.length;
+        if (length == 0) {
+            return false;
+        }
+        boolean[] s = new boolean[length];
+        s[0] = true;
+        for (int i = 1; i < length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (s[i]) {
+                    break;
+                }
+                s[i] = s[j] && (j + A[j] >= i);
+            }
+            if (!s[i]) return false;
+        }
+        return s[length - 1];
+    }
+
+    /**
+     * 贪心算法实现116-跳跃游戏
+     *
+     * @param A
+     * @return
+     */
+    public static boolean canJumpGreedy(int[] A) {
+        if (A.length == 0) {
+            return false;
+        }
+        int max = A[0];
+        for (int i = 1; i < A.length; i++) {
+            if (max < i) return false;
+            max = max > i + A[i] ? max : i + A[i];
+            if (max > A.length - 1) return true;
+        }
+        return true;
+    }
+
+    /**
+     * 另外一种用贪心算法实现116-跳跃游戏
+     *
+     * @param A
+     * @return
+     */
+    public static boolean canJumpGreedyTwo(int[] A) {
+        if (A.length == 0) {
+            return false;
+        }
+        int position = A.length - 1;
+        for (int i = A.length - 1; i >= 0; i--) {
+            if (i + A[i] >= position) {
+                position = i;
+            }
+        }
+        return position == 0;
     }
 
     public static int canCompleteCircuit(int[] gas, int[] cost) {
