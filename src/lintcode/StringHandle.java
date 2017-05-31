@@ -5,9 +5,28 @@ package lintcode;
  */
 public class StringHandle {
     public static void main(String[] args) {
-        System.out.println(addStrings("158", "66"));
+        System.out.println(palindromeNumber(1222121));
     }
 
+
+    /**
+     * 491-回文数
+     * @param num
+     * @return
+     */
+    public static boolean palindromeNumber(int num) {
+        String s = String.valueOf(num);
+        int i = 0;
+        int j = s.length() - 1;
+        while (s.charAt(i) == s.charAt(j) && i < j) {
+            i++;
+            j--;
+        }
+        if (i < j) {
+            return false;
+        }
+        return true;
+    }
     public static String countAndSay(int n) {
         String str = "1";
         if (n <= 1) {
