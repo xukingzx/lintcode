@@ -9,9 +9,31 @@ import java.util.List;
  */
 public class Sort {
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 3, 5};
-        new ArrayList<>();
-        List list = Arrays.asList(nums);
+        char[] chars = new char[]{'a', 's', 'D', 'f', 'E'};
+        sortLetters(chars);
+    }
+
+    /**
+     * 49-字符大小写排序
+     * @param chars
+     */
+    public static void sortLetters(char[] chars) {
+        if (chars.length == 0) {
+            return;
+        }
+        int i = 0;
+        int j = chars.length - 1;
+        while (i < j) {
+            while (chars[i] >= 'a' && chars[i] <= 'z' && i < j) {
+                i++;
+            }
+            while (chars[j] >= 'A' && chars[j] <= 'Z' && i < j) {
+                j--;
+            }
+            char temp = chars[i];
+            chars[i] = chars[j];
+            chars[j] = temp;
+        }
     }
 
     public static int count(int a, int b) {
