@@ -1,14 +1,60 @@
 package lintcode;
 
+import java.util.Arrays;
+
 /**
  * Created by ouakira on 2017/4/5.
  */
 public class StringHandle {
     public static void main(String[] args) {
-        System.out.println(palindromeNumber(1222121));
+        System.out.println(reverseWords("hello     world        nihao"));
     }
 
+    /**
+     * 53-翻转字符串
+     * @param s
+     * @return
+     */
+    public static String reverseWords(String s) {
+        if (s == null || s.trim().length() == 0) {
+            return s;
+        }
+        s = s.trim();
+        int i = 1;
+        int j = 1;
+        int begin = 0;
+        int end;
+        char[] chars = s.toCharArray();
+        while(i < chars.length) {
+            if (!(chars[i - 1] == ' ' && chars[i] == ' ')) {
+                chars[j] = chars[i];
+                j++;
+            }
+            i++;
+        }
+        chars = Arrays.copyOfRange(chars, 0, j);
+        for (i = 0; i < chars.length; i++) {
+            if (i == chars.length - 1 || chars[i + 1] == ' ') {
+                end = i;
+                reveseWord(chars, begin, end);
+                begin = i + 2;
+            }
+        }
+        for (i = 0, j = chars.length - 1;i < j; i++, j--) {
+            char temp = chars[i];
+            chars[i] = chars[j];
+            chars[j] = temp;
+        }
+        return new String(chars);
+    }
 
+    private static void reveseWord(char[] chars, int a, int b) {
+        for (int i = a, j = b; i < j; i++, j--) {
+            char temp = chars[i];
+            chars[i] = chars[j];
+            chars[j] = temp;
+        }
+    }
     /**
      * 491-回文数
      * @param num
