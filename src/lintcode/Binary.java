@@ -108,4 +108,19 @@ public class Binary {
         System.out.println(m);
         return n | m;
     }
+
+    /**
+     * 128-哈希函数
+     * @param key
+     * @param HASH_SIZE
+     * @return
+     */
+    public static int hashCode(char[] key, int HASH_SIZE) {
+        // write your code here
+        long sum = (int)key[0];//sum * 33可能会超出int范围
+        for(int i = 1; i < key.length; i++) {
+            sum = sum * 33 % HASH_SIZE + (int)key[i];//即使求余，否则超出long范围
+        }
+        return (int)(sum % HASH_SIZE);
+    }
 }
