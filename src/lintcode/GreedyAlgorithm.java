@@ -7,8 +7,9 @@ import java.util.Arrays;
  */
 public class GreedyAlgorithm {
     public static void main(String[] args) {
-        int[] nums = {3, 1, 1, 0, 3};
-        System.out.println(canJumpGreedyTwo(nums));
+        int[] nums = {100,61,56,6,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2};
+        sort(nums, 0 ,nums.length - 1);
+        System.out.println(Arrays.toString(nums));
     }
 
     /**
@@ -166,29 +167,34 @@ public class GreedyAlgorithm {
         return str;
     }
 
+    /**
+     * 52-下一个排列
+     *
+     * @param nums
+     * @return
+     */
     public static int[] nextPermutation(int[] nums) {
-        int length = nums.length;
-        for (int i = length - 1; i > 0; i--) {
-            for (int j = i - 1; j >= 0; j--) {
-                if (nums[i] > nums[j]) {
-                    int a = nums[i];
-                    nums[i] = nums[j];
-                    nums[j] = a;
-                    sort(nums, i, length - 1);
+        for (int i = nums.length - 1; i >= 0; i--) {
+            for (int j = nums.length - 1; j > i; j--) {
+                if (nums[j] > nums[i]) {
+                    int temp = nums[j];
+                    nums[j] = nums[i];
+                    nums[i] = temp;
+                    sort(nums, i + 1, nums.length - 1);
                     return nums;
                 }
             }
         }
-        sort(nums, 0, length - 1);
+        sort(nums, 0, nums.length - 1);
         return nums;
     }
 
-    private static void sort(int[] nums, int left, int right) {
+    public static void sort(int[] nums, int left, int right) {
         int l = left;
         int r = right;
         int temp = nums[l];
         while (l < r) {
-            while (l < r && nums[r] > temp)
+            while (l < r && nums[r] >= temp)
                 r--;
             if (l < r) {
                 int a = nums[l];

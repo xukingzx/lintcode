@@ -10,6 +10,9 @@ import java.util.List;
 public class Sort {
     public static void main(String[] args) {
         char[] chars = new char[]{'a', 's', 'D', 'f', 'E'};
+        int[] nums = new int[] {100,61,56,44,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2};
+        fastSort(nums, 0 , nums.length - 1);
+        System.out.println(Arrays.toString(nums));
         sortLetters(chars);
     }
 
