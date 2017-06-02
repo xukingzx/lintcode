@@ -13,6 +13,19 @@ public class GreedyAlgorithm {
     }
 
     /**
+     * 82-落单的数
+     * @param A
+     * @return
+     */
+    public static int singleNumber(int[] A) {
+        int temp = 0;
+        for (int i = 0; i < A.length; i++) {
+            temp ^= A[i];
+        }
+        return temp;
+    }
+
+    /**
      * 动态规划实现116-跳跃游戏
      *
      * @param A
