@@ -22,6 +22,38 @@ public class LinkedList {
         node.next = node.next.next;
     }
 
+    /**
+     * 174-删除链表中倒数第n个节点
+     * @param head
+     * @param n
+     * @return
+     */
+    static ListNode removeNthFromEnd(ListNode head, int n) {
+        int i = 1;
+        ListNode node = head;
+        ListNode preNode = head;
+        while (node != null) {
+            if (i > n + 1) {
+                preNode = preNode.next;
+            }
+            node = node.next;
+            i++;
+        }
+        if (i <= n) {
+            return head;
+        }
+        if (i - 1 == n) {
+            if (preNode.next == null) {
+                return null;
+            }
+            preNode.val = preNode.next.val;
+            preNode.next = preNode.next.next;
+            return head;
+        }
+        preNode.next = preNode.next.next;
+        return head;
+    }
+
     public static ListNode removeElements(ListNode head, int val) {
         // Write your code here
         if (head == null) {
