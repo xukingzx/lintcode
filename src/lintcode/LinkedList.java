@@ -8,7 +8,7 @@ public class LinkedList {
         ListNode head = new ListNode(1);
         head.next = new ListNode(2);
         head.next.next = new ListNode(3);
-        printNode(reverse(head));
+        printNode(rotateRight(head, 2));
     }
 
     public static void printNode(ListNode head) {
@@ -23,6 +23,32 @@ public class LinkedList {
         // write your code here
         node.val = node.next.val;
         node.next = node.next.next;
+    }
+
+    /**
+     * 170-旋转链表
+     * @param head
+     * @param k
+     * @return
+     */
+    public static ListNode rotateRight(ListNode head, int k) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        int len = 1;
+        ListNode node = head;
+        ListNode last = head;
+        while (last.next != null) {
+            last = last.next;
+            len++;
+        }
+        k = k % len;
+        while (k-- > 0) {
+            node = node.next;
+        }
+        ListNode newHead = node.next;
+        node.next = null;
+        return newHead;
     }
 
     /**
