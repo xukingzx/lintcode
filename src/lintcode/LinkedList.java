@@ -190,6 +190,27 @@ public class LinkedList {
         return head;
     }
 
+    /**
+     * 102-带环链表
+     * @param head
+     * @return
+     */
+    public static boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+        ListNode preNode = head;
+        ListNode node = head;
+        while (node != null && node.next != null) {
+            preNode = preNode.next;
+            node = node.next.next;
+            if (node == preNode) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static ListNode removeElements(ListNode head, int val) {
         // Write your code here
         if (head == null) {
