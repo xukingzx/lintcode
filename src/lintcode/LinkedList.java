@@ -1,5 +1,7 @@
 package lintcode;
 
+import java.util.HashMap;
+
 /**
  * Created by ouakira on 2017/5/19.
  */
@@ -23,6 +25,25 @@ public class LinkedList {
         // write your code here
         node.val = node.next.val;
         node.next = node.next.next;
+    }
+
+    /**
+     * 96-链表划分
+     */
+    public static ListNode partition(ListNode head, int x) {
+        // write your code here
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode minNode = new ListNode(0);
+        ListNode maxNode = new ListNode(0);
+        ListNode node = head;
+        while (node != null) {
+            if (node.val < x) {
+                
+            }
+        }
+        return head;
     }
 
     /**
