@@ -7,8 +7,8 @@ import java.util.*;
  */
 public class IntegerArray {
     public static void main(String[] args) {
-        int[] nums = {4,5,6,1,2,3};
-        System.out.println(findMin(nums));
+        int[] nums = {9};
+        System.out.println(Arrays.toString(plusOne(nums)));
     }
 
     public static int findMin(int[] nums) {
@@ -40,18 +40,18 @@ public class IntegerArray {
         return 0;
     }
 
-    public static int[] subarraySumClosest(int[] nums){
+    public static int[] subarraySumClosest(int[] nums) {
         Map<Integer, int[]> map = new HashMap<>();
         int min = f(nums[0]);
-        for (int i = 0; i < nums.length; i++){
+        for (int i = 0; i < nums.length; i++) {
             int sum = 0;
-            for (int j = i; j < nums.length; j++){
+            for (int j = i; j < nums.length; j++) {
                 sum += nums[j];
-                if (sum == 0){
+                if (sum == 0) {
                     return new int[]{i, j};
                 }
                 map.put(f(sum), new int[]{i, j});
-                if (f(sum) < min){
+                if (f(sum) < min) {
                     min = f(sum);
                 }
             }
@@ -330,9 +330,30 @@ public class IntegerArray {
         while (blen >= 0) {
             nums[len--] = B[blen--];
         }
-        while (alen >= 0){
+        while (alen >= 0) {
             nums[len--] = A[alen--];
         }
         return nums;
+    }
+
+    public static int[] plusOne(int[] digits) {
+        int i = digits.length - 1;
+        while (i >= 0) {
+            if (digits[i] + 1 == 10) {
+                digits[i] = 0;
+            } else {
+                digits[i]++;
+                break;
+            }
+            i--;
+        }
+        if (i < 0) {
+            digits = new int[digits.length + 1];
+            digits[0] = 1;
+            for (int j = 1; j < digits.length; j++) {
+                digits[j] = 0;
+            }
+        }
+        return digits;
     }
 }

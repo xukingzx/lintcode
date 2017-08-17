@@ -1,6 +1,9 @@
 package lintcode;
 
+import java.io.*;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ouakira on 2017/5/19.
@@ -11,6 +14,7 @@ public class LinkedList {
         head.next = new ListNode(2);
         head.next.next = new ListNode(3);
         printNode(rotateRight(head, 2));
+
     }
 
     public static void printNode(ListNode head) {
@@ -210,6 +214,7 @@ public class LinkedList {
         }
         return false;
     }
+
 
     public static ListNode removeElements(ListNode head, int val) {
         // Write your code here
