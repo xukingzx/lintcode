@@ -10,10 +10,13 @@ import java.util.Map;
  */
 public class LinkedList {
     public static void main(String[] args) {
-        ListNode head = new ListNode(1);
-        head.next = new ListNode(2);
+        ListNode head = new ListNode(4);
+        head.next = new ListNode(1);
         head.next.next = new ListNode(3);
-        printNode(rotateRight(head, 2));
+        head.next.next.next = new ListNode(2);
+        head.next.next.next.next = new ListNode(5);
+        head.next.next.next.next.next = new ListNode(2);
+        printNode(partition(head, 1));
 
     }
 
@@ -29,25 +32,6 @@ public class LinkedList {
         // write your code here
         node.val = node.next.val;
         node.next = node.next.next;
-    }
-
-    /**
-     * 96-链表划分
-     */
-    public static ListNode partition(ListNode head, int x) {
-        // write your code here
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode minNode = new ListNode(0);
-        ListNode maxNode = new ListNode(0);
-        ListNode node = head;
-        while (node != null) {
-            if (node.val < x) {
-                
-            }
-        }
-        return head;
     }
 
     /**
@@ -213,6 +197,61 @@ public class LinkedList {
             }
         }
         return false;
+    }
+
+    /**
+     * 96-链表划分
+     * @param head
+     * @param x
+     * @return
+     */
+    public static ListNode partition(ListNode head, int x) {
+        if (head == null) {
+            return head;
+        }
+        ListNode node = head;
+        ListNode preNode;
+        ListNode temp;
+        while (node.next != null) {
+            if (node.val < x && node.next.val >= x) {
+                preNode = node.next;
+                while (preNode.next != null) {
+                    if (preNode.val >= x && preNode.next.val < x) {
+                        break;
+                    }
+                    preNode = preNode.next;
+                }
+                if (preNode.next == null) {
+                    break;
+                }
+                temp = preNode.next;
+                preNode.next = temp.next;
+                temp.next = node.next;
+                node.next = temp;
+            }
+            node = node.next;
+        }
+        if (head.val >= x) {
+            node = head;
+            while (node.next != null) {
+                if (node.val >= x && node.next.val < x) {
+                    preNode = node;
+                    while (preNode.next != null) {
+                        if (preNode.val < x && preNode.next.val >= x) {
+                            break;
+                        }
+                        preNode = preNode.next;
+                    }
+                    temp = node.next;
+                    node.next = preNode.next;
+                    preNode.next = head;
+                    head = temp;
+                    break;
+                }
+                node = node.next;
+            }
+        }
+        return head;
     }
 
 
