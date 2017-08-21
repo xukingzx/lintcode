@@ -8,7 +8,7 @@ import java.util.*;
 public class IntegerArray {
     public static void main(String[] args) {
         int[] nums = {9};
-        System.out.println(Arrays.toString(plusOne(nums)));
+        System.out.println(isPalindrome("1a2"));
     }
 
     public static int findMin(int[] nums) {
@@ -336,6 +336,11 @@ public class IntegerArray {
         return nums;
     }
 
+    /**
+     * 407-加一
+     * @param digits
+     * @return
+     */
     public static int[] plusOne(int[] digits) {
         int i = digits.length - 1;
         while (i >= 0) {
@@ -355,5 +360,58 @@ public class IntegerArray {
             }
         }
         return digits;
+    }
+
+    /**
+     * 413-反转整数
+     * @param n
+     * @return
+     */
+    public static int reverseInteger(int n) {
+        boolean flag = true;
+        char temp;
+        if (n < 0) {
+            n = -n;
+            flag = false;
+        }
+        String s = String.valueOf(n);
+        char[] c = s.toCharArray();
+        for (int i = 0; i < c.length / 2; i++) {
+            temp = c[i];
+            c[i] = c[c.length - i - 1];
+            c[c.length - i - 1] = temp;
+        }
+        s = new String(c);
+        if (s.length() == String.valueOf(Integer.MAX_VALUE).length() && s.compareTo(String.valueOf(Integer.MAX_VALUE)) > 0) {
+            return 0;
+        }
+        n = Integer.parseInt(s);
+        if (!flag) {
+            n = -n;
+        }
+        return n;
+    }
+
+    /**
+     * 415-有效回文串
+     * @param s
+     * @return
+     */
+    public static boolean isPalindrome(String s) {
+        s = s.trim().toLowerCase();
+        char[] c = s.toCharArray();
+        StringBuffer buffer = new StringBuffer();
+        for (int i = 0 ; i < c.length; i++) {
+            if ((c[i] >= 'a' && c[i] <= 'z') || (c[i] > '1' && c[i] < '9')) {
+                buffer.append(c[i]);
+            }
+        }
+        c = buffer.toString().toCharArray();
+        for (int i = 0; i < c.length / 2; i++) {
+            if (c[i] != c[c.length - i - 1]) {
+                return false;
+            }
+        }
+        return true;
     }
 }
