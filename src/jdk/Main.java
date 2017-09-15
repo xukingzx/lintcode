@@ -1,5 +1,9 @@
 package jdk;
 
+import jdk.paradigm.Pair;
+import jdk.paradigm.Text;
+
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -7,22 +11,30 @@ import java.util.*;
  */
 public class Main {
     public static void main(String[] args) {
-        List<String> a = new ArrayList<>();
-        a.add("1");
-        a.add("2");
-        Iterator<String> it = a.iterator();
-        while (it.hasNext()) {
-            String next = it.next();
-            if ("2".equals(next)) {
-                it.remove();
-            }
-        }
-//        for (String temp : a) {
-//            if ("2".equals(temp)) {
-//                a.remove(temp);
-//            }
-//        }
-        System.out.println(a.toString());
+//        Text first = new Text("first");
+//        first.setText("first");
+//        Text second = new Text("seconde");
+//        second.setText("second");
+        String first = "first";
+        String second = "second";
+        Pair<String> textPair = new Pair<>(first, second);
+        first = "third";
+        System.out.println(textPair);
+        String a = "1234";
+        String b = "1234";
+        String c = new String("1234");
+        String d = "abcd";
+        String e = "1234abcd";
+        String f = "1234" + "abcd";
+        String g = "1234" + d;
+        String h = a + d;
+        String i = h.intern();
+        System.out.println(a == b);
+        System.out.println(a == c);
+        System.out.println(e == f);
+        System.out.println(e == g);
+        System.out.println(e == h);
+        System.out.println(e == i);
     }
 
     public static Optional<Article> getFirstJavaArticle() {

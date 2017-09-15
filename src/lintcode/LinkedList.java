@@ -10,13 +10,14 @@ import java.util.Map;
  */
 public class LinkedList {
     public static void main(String[] args) {
-        ListNode head = new ListNode(4);
-        head.next = new ListNode(1);
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
         head.next.next = new ListNode(3);
-        head.next.next.next = new ListNode(2);
+        head.next.next.next = new ListNode(4);
         head.next.next.next.next = new ListNode(5);
-        head.next.next.next.next.next = new ListNode(2);
-        printNode(partition(head, 1));
+        head.next.next.next.next.next = new ListNode(6);
+//        head.next.next.next.next.next.next = new ListNode(7);
+        printNode(reorderList(head));
 
     }
 
@@ -253,6 +254,32 @@ public class LinkedList {
         }
         return head;
     }
+
+    /**
+     * 99-重排链表
+     * @param head
+     */
+    public static ListNode reorderList(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        ListNode node = head;
+        ListNode preNode = head;
+        while (node.next != null && node.next.next != null) {
+            node = node.next.next;
+            preNode = preNode.next;
+        }
+        node = preNode.next;
+        while (node != null && node.next != null) {
+            ListNode temp = preNode.next;
+            preNode.next = node.next;
+            node.next = preNode.next.next;
+            preNode.next.next = temp;
+        }
+
+        return head;
+    }
+
 
 
     public static ListNode removeElements(ListNode head, int val) {
