@@ -21,7 +21,7 @@ public class JoinThread extends Thread {
         t1.start();
         try{
             //t1.join(1000);
-            t1.join(10000);
+            t1.join();
 //            t1.sleep(10000);
             //Thread.sleep(1000);
         } catch(InterruptedException e){

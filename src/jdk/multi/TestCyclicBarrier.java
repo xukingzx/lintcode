@@ -32,11 +32,14 @@ public class TestCyclicBarrier {
             @Override
             public void run() {
                 System.out.println("Inside Barrier");
+                System.out.println(Thread.activeCount());
             }
         });
 
         for (int i = 0; i < THREAD_NUM; i++) {
             new Thread(new WorkeThread(cb)).start();
         }
+
+        System.out.println(Thread.activeCount());
     }
 }
